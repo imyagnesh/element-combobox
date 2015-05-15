@@ -1,0 +1,63 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html">
+
+
+<dom-module id="country-service">
+  <style>
+    :host {
+      display: none;
+    }
+  </style>
+  <template>
+    <!--<iron-ajax url="http://localhost:3000/api/posts.json"-->
+               <!--handleAs="json"-->
+               <!--auto last-response="{{resp}}"></iron-ajax>-->
+    <iron-ajax id="ajax"
+      auto
+      url="http://localhost:3000/api/posts.json"
+      handle-as="json"
+      on-response="handleResponse" on-error="handleError"></iron-ajax>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: "country-service",
+
+      properties: {
+        data: {
+          type:   Object,
+          notify: true
+        }
+      },
+
+      handleResponse: function(event, response) {
+        this.data = [];
+      },
+
+      handleError: function (event, response) {
+        this.data = [];
+      },
+
+      getIndexData: function (searchResult, startIndex, endIndex) {
+        return _.slice(searchResult, startIndex, endIndex);
+      },
+
+      searchData: function (input,startIndex,endIndex) {
+        var searchResult = [];
+        if(input !== '') {
+          searchResult = _.select(this.$.ajax.lastResponse, function (n) {
+            return (n.name.toLowerCase().indexOf(input.toLowerCase()) > -1);
+          });
+        }
+
+        var service = {
+          data : this.getIndexData(searchResult,startIndex,endIndex),
+          totalCount : searchResult.length
+        };
+        return service;
+      }
+
+    });
+  })();
+</script>
