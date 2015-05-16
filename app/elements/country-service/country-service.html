@@ -9,55 +9,74 @@
     }
   </style>
   <template>
-    <!--<iron-ajax url="http://localhost:3000/api/posts.json"-->
-               <!--handleAs="json"-->
-               <!--auto last-response="{{resp}}"></iron-ajax>-->
     <iron-ajax id="ajax"
-      auto
-      url="http://localhost:3000/api/posts.json"
-      handle-as="json"
-      on-response="handleResponse" on-error="handleError"></iron-ajax>
+               auto
+               url="http://localhost:3000/api/posts.json"
+               handle-as="json"
+               on-response="handleResponse" on-error="handleError"></iron-ajax>
   </template>
 </dom-module>
 <script>
-  (function () {
-    Polymer({
-      is: "country-service",
+  Polymer({
+    is: "country-service",
 
-      properties: {
-        data: {
-          type:   Object,
-          notify: true
-        }
-      },
+    properties: {
 
-      handleResponse: function(event, response) {
-        this.data = [];
-      },
+      /**
+       * response data
+       */
+      data: {
+        type: Object,
+        notify: true
+      }
+    },
 
-      handleError: function (event, response) {
-        this.data = [];
-      },
+    /**
+     * handleResponse. if error occur on get data it make list null
+     *
+     * @method handleResponse
+     */
+    handleResponse: function (event, response) {
+      this.data = this.$.ajax.lastResponse;
+    },
 
-      getIndexData: function (searchResult, startIndex, endIndex) {
-        return _.slice(searchResult, startIndex, endIndex);
-      },
+    /**
+     * handle error. if error occur on get data it make list null
+     *
+     * @method handleError
+     */
+    handleError: function (event, response) {
+      this.data = [];
+    },
 
-      searchData: function (input,startIndex,endIndex) {
-        var searchResult = [];
-        if(input !== '') {
-          searchResult = _.select(this.$.ajax.lastResponse, function (n) {
-            return (n.name.toLowerCase().indexOf(input.toLowerCase()) > -1);
-          });
-        }
+    /**
+     * Performs slice array.
+     *
+     * @method getIndexData
+     */
+    getIndexData: function (searchResult, startIndex, endIndex) {
+      return _.slice(searchResult, startIndex, endIndex);
+    },
 
-        var service = {
-          data : this.getIndexData(searchResult,startIndex,endIndex),
-          totalCount : searchResult.length
-        };
-        return service;
+    /**
+     * Performs search data and return slected index data.
+     *
+     * @method searchData
+     */
+    searchData: function (input, startIndex, endIndex) {
+      var searchResult = [];
+      if (input !== '') {
+        searchResult = _.select(this.$.ajax.lastResponse, function (n) {
+          return (n.name.toLowerCase().indexOf(input.toLowerCase()) > -1);
+        });
       }
 
-    });
-  })();
+      var service = {
+        data: this.getIndexData(searchResult, startIndex, endIndex),
+        totalCount: searchResult.length
+      };
+      return service;
+    }
+
+  });
 </script>
