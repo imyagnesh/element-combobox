@@ -18,7 +18,7 @@
 </dom-module>
 <script>
   Polymer({
-    is: "country-service",
+    is: 'country-service',
 
     properties: {
 
@@ -36,7 +36,7 @@
      *
      * @method handleResponse
      */
-    handleResponse: function (event, response) {
+    handleResponse: function () {
       this.data = this.$.ajax.lastResponse;
     },
 
@@ -45,7 +45,7 @@
      *
      * @method handleError
      */
-    handleError: function (event, response) {
+    handleError: function () {
       this.data = [];
     },
 
@@ -72,7 +72,7 @@
       }
 
       _.remove(searchResult, function(n) {
-        return (_.findIndex(selectedItems, n) != -1)
+        return (_.findIndex(selectedItems, n) !== -1);
       });
 
       var service = {

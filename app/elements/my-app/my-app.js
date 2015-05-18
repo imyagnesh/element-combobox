@@ -3,7 +3,7 @@ var doneTypingInterval = 500;  //time in ms, 5 second for example
 
 Polymer({
 
-  is: "my-app",
+  is: 'my-app',
 
   properties: {
 
@@ -13,6 +13,11 @@ Polymer({
     enabled: {
       type: Boolean,
       value: false
+    },
+
+    hostValue:{
+      type: String,
+      value: ''
     },
 
     isOpen:{
@@ -174,7 +179,6 @@ Polymer({
 
   removeItem: function (e) {
     var item = this.$.selectedRepeater.itemForElement(e.target);
-    console.log(item);
     this.$.selector.select(item);
   }
 
