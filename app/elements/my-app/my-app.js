@@ -20,6 +20,11 @@ Polymer({
       value: ''
     },
 
+    isDisabled:{
+      type: Boolean,
+      value: false
+    },
+
     isOpen:{
       type: Boolean,
       value: false
@@ -83,6 +88,14 @@ Polymer({
     }
   },
 
+  ready: function() {
+    if(this.isDisabled)
+    {
+      var ironSelector = Polymer.dom(this.root).querySelector('span.select2-container');
+      ironSelector.classList.add('select2-container--disabled');
+    }
+  },
+
   /**
    * Performs search data from combo-box.
    *
@@ -131,7 +144,6 @@ Polymer({
     var firstCell = Math.max(Math.floor(this.scrollTop / this.rowHeight) - this.cellsPerPage, 0);
     var cellsToCreate = Math.min(firstCell + this.numberOfCells, this.numberOfCells);
     var searchResult = this.$.service.searchData(searchString,this.selected, firstCell, firstCell + cellsToCreate);
-
     this.cData = searchResult.data;
     var ironSelector = Polymer.dom(this.root).querySelector('div.canvas');
     ironSelector.setAttribute('style', 'height: ' + searchResult.totalCount * this.rowHeight + 'px;');

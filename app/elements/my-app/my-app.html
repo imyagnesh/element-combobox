@@ -3,13 +3,15 @@
 <link rel="import" href="../country-service/country-service.html">
 
 <dom-module id="my-app">
+
   <link rel="stylesheet" href="my-app.css">
 
   <template>
     <country-service id="service" data="{{countryData}}"></country-service>
     <array-selector id="selector" items="{{countryData}}" selected="{{selected}}" multi toggle></array-selector>
+
     <h3>Multi-select</h3>
-    <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 360px;">
+    <span class="select2-container select2-container--default" dir="ltr" style="width: 360px;">
       <span class="selection">
         <span aria-expanded="false" aria-haspopup="true" aria-autocomplete="list" role="combobox" class="select2-selection select2-selection--multiple" tabindex="0">
           <ul class="select2-selection__rendered">
@@ -17,7 +19,7 @@
               <li class="select2-selection__choice"><span role="presentation" class="select2-selection__choice__remove" on-click="removeItem">×</span>{{item.name}}</li>
             </template>
             <li class="select2-search select2-search--inline">
-              <input type="search" role="textbox" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" tabindex="-1" class="select2-search__field" on-input="searchVal" id="search" value="{{hostValue::input}}">
+              <input type="search" role="textbox" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" tabindex="-1" class="select2-search__field" on-input="searchVal" id="search" value="{{hostValue::input}}" disabled$="{{isDisabled}}">
             </li>
           </ul>
         </span>
@@ -41,5 +43,7 @@
       </iron-collapse>
     </div>
   </template>
+
 </dom-module>
+
 <script src="my-app.js"></script>

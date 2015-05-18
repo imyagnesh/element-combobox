@@ -21,12 +21,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="my-app.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="my-app.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.0375">
-              <caret line="19" column="222" selection-start-line="19" selection-start-column="213" selection-end-line="19" selection-end-column="222" />
+            <state vertical-scroll-proportion="0.17302799">
+              <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
               <folding>
+                <element signature="n#template#0;n#dom-module#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#span#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -53,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="country-service.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="country-service.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/elements/country-service/country-service.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7493858">
-              <caret line="74" column="54" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
+            <state vertical-scroll-proportion="-1.3137255">
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -76,8 +77,8 @@
       <file leaf-file-name="my-app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.296296">
-              <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+            <state vertical-scroll-proportion="-57.925926">
+              <caret line="184" column="42" selection-start-line="184" selection-start-column="42" selection-end-line="184" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -86,8 +87,8 @@
       <file leaf-file-name="my-app.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.037037">
-              <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+            <state vertical-scroll-proportion="16.75926">
+              <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -150,10 +151,10 @@
         <option value="$PROJECT_DIR$/app/Api/posts.json" />
         <option value="$PROJECT_DIR$/app/elements/elements.html" />
         <option value="$PROJECT_DIR$/wct.conf.js" />
+        <option value="$PROJECT_DIR$/app/elements/country-service/country-service.html" />
+        <option value="$PROJECT_DIR$/app/elements/my-app/my-app.js" />
         <option value="$PROJECT_DIR$/app/elements/my-app/my-app.css" />
         <option value="$PROJECT_DIR$/app/elements/my-app/my-app.html" />
-        <option value="$PROJECT_DIR$/app/elements/my-app/my-app.js" />
-        <option value="$PROJECT_DIR$/app/elements/country-service/country-service.html" />
       </list>
     </option>
   </component>
@@ -388,7 +389,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45637584" sideWeight="0.49034983" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45637584" sideWeight="0.49034983" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -481,6 +482,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="61" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="61" />
           <folding>
+            <element signature="n#template#0;n#dom-module#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#span#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
           </folding>
         </state>
@@ -771,37 +773,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.css">
+    <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.037037">
-          <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
+        <state vertical-scroll-proportion="-57.925926">
+          <caret line="184" column="42" selection-start-line="184" selection-start-column="42" selection-end-line="184" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.html">
+    <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.0375">
-          <caret line="19" column="222" selection-start-line="19" selection-start-column="213" selection-end-line="19" selection-end-column="222" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.296296">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        <state vertical-scroll-proportion="16.75926">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/elements/country-service/country-service.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7493858">
-          <caret line="74" column="54" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
+        <state vertical-scroll-proportion="-1.3137255">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/elements/my-app/my-app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17302799">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding>
+            <element signature="n#template#0;n#dom-module#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#span#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
