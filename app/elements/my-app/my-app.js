@@ -15,6 +15,16 @@ Polymer({
       value: false
     },
 
+    isOpen:{
+      type: Boolean,
+      value: false
+    },
+
+    isMinChar: {
+      type: Boolean,
+      value: true
+    },
+
     /**
      * list of combo-box data.
      */
@@ -74,19 +84,27 @@ Polymer({
    * @event searchVal
    */
   searchVal: function () {
-    var myApp = this;
-    myApp.enabled = true;
-    myApp.scrollTop = 0;
-    clearTimeout(typingTimer);
-    typingTimer = setInterval(function () {
+    if(this.$.search.value.length >= 2) {
+      var myApp = this;
+      myApp.enabled = true;
+      myApp.isOpen = true;
+      myApp.isMinChar = false;
+
+      myApp.scrollTop = 0;
       clearTimeout(typingTimer);
-      myApp.enabled = false;
-      myApp.cellsPerPage = Math.round(myApp.height / myApp.rowHeight);
-      myApp.numberOfCells = 3 * myApp.cellsPerPage;
-
-      myApp.updateDisplayList();
-
-    }, doneTypingInterval);
+      typingTimer = setInterval(function () {
+        clearTimeout(typingTimer);
+        myApp.cellsPerPage = Math.round(myApp.height / myApp.rowHeight);
+        myApp.numberOfCells = 3 * myApp.cellsPerPage;
+        myApp.updateDisplayList(myApp.hostValue);
+        myApp.enabled = false;
+      }, doneTypingInterval);
+    }
+    else{
+      this.isMinChar = true;
+      this.isOpen = false;
+      this.updateDisplayList('');
+    }
   },
 
   /**
@@ -95,9 +113,8 @@ Polymer({
    * @event scrollData
    */
   scrollData: function () {
-    var searchData = this.$.search.value;
     this.scrollTop = this.$.scroll.scrollTop;
-    this.updateDisplayList();
+    this.updateDisplayList(this.hostValue);
   },
 
   /**
@@ -105,14 +122,11 @@ Polymer({
    *
    * @method updateDisplayList
    */
-  updateDisplayList: function () {
-    var thisData = this;
-    var searchData = this.$.search.value;
-    if(searchData.length < 2)
-      searchData = '';
+  updateDisplayList: function (searchString) {
     var firstCell = Math.max(Math.floor(this.scrollTop / this.rowHeight) - this.cellsPerPage, 0);
     var cellsToCreate = Math.min(firstCell + this.numberOfCells, this.numberOfCells);
-    var searchResult = this.$.service.searchData(searchData, firstCell, firstCell + cellsToCreate);
+    var searchResult = this.$.service.searchData(searchString,this.selected, firstCell, firstCell + cellsToCreate);
+
     this.cData = searchResult.data;
     var ironSelector = Polymer.dom(this.root).querySelector('div.canvas');
     ironSelector.setAttribute('style', 'height: ' + searchResult.totalCount * this.rowHeight + 'px;');
@@ -137,10 +151,10 @@ Polymer({
    * @event isSelected
    */
   isSelected: function (item) {
-    if(_.findIndex(this.selected, item) === -1){
+    if (_.findIndex(this.selected, item) === -1) {
       return 'renderer';
     }
-    else{
+    else {
       return 'renderer selected';
     }
   },
@@ -154,6 +168,16 @@ Polymer({
     e.target.classList.toggle('selected');
     var item = this.$.dataRepeater.itemForElement(e.target);
     this.$.selector.select(item);
+    this.hostValue = '';
+    this.isOpen = false;
+  },
+
+  removeItem: function (e) {
+    var item = this.$.selectedRepeater.itemForElement(e.target);
+    console.log(item);
+    this.$.selector.select(item);
   }
+
+
 
 });

@@ -63,13 +63,17 @@
      *
      * @method searchData
      */
-    searchData: function (input, startIndex, endIndex) {
+    searchData: function (input,selectedItems, startIndex, endIndex) {
       var searchResult = [];
       if (input !== '') {
         searchResult = _.select(this.$.ajax.lastResponse, function (n) {
           return (n.name.toLowerCase().indexOf(input.toLowerCase()) > -1);
         });
       }
+
+      _.remove(searchResult, function(n) {
+        return (_.findIndex(selectedItems, n) != -1)
+      });
 
       var service = {
         data: this.getIndexData(searchResult, startIndex, endIndex),

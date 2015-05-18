@@ -1,18 +1,36 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/layout/layout.html">
 <link rel="import" href="../country-service/country-service.html">
 
 <dom-module id="my-app">
   <link rel="stylesheet" href="my-app.css">
 
-  <template is="dom-bind">
+  <template>
     <country-service id="service" data="{{countryData}}"></country-service>
-
+    <array-selector id="selector" items="{{countryData}}" selected="{{selected}}" multi toggle></array-selector>
     <h3>Multi-select</h3>
-
-    <input type="text" on-input="searchVal" id="search">
-    <div id="Loading" hidden="{{!enabled}}">Loading...</div>
+    <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 360px;">
+      <span class="selection">
+        <span aria-expanded="false" aria-haspopup="true" aria-autocomplete="list" role="combobox" class="select2-selection select2-selection--multiple" tabindex="0">
+          <ul class="select2-selection__rendered">
+            <template is="dom-repeat" items="{{selected}}" id="selectedRepeater">
+              <li class="select2-selection__choice"><span role="presentation" class="select2-selection__choice__remove" on-click="removeItem">×</span>{{item.name}}</li>
+            </template>
+            <li class="select2-search select2-search--inline">
+              <input type="search" role="textbox" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" tabindex="-1" class="select2-search__field" on-input="searchVal" id="search" value="{{hostValue::input}}">
+            </li>
+          </ul>
+        </span>
+      </span>
+    </span>
+    <div hidden$="{{!isMinChar}}">
+      Please enter 2 or more characters
+    </div>
     <div id="collapse">
-      <iron-collapse fixedSize="true" id="collapse1">
+      <iron-collapse fixedSize="true" id="collapse1" opened="{{isOpen}}">
+        <div id="Loading" hidden$="{{!enabled}}">
+          Loading...
+        </div>
         <div id="scroll" on-scroll="scrollData">
           <div class="canvas" id="canvas">
             <template is="dom-repeat" items="{{cData}}" id="dataRepeater">
@@ -23,11 +41,6 @@
       </iron-collapse>
     </div>
 
-    <array-selector id="selector" items="{{countryData}}" selected="{{selected}}" multi toggle></array-selector>
-
-    <template is="dom-repeat" items="{{selected}}">
-      <span>{{item.name}}</span>
-    </template>
 
   </template>
 </dom-module>
