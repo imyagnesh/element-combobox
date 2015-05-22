@@ -9,11 +9,11 @@
     }
   </style>
   <template>
-    <iron-ajax id="ajax"
-               auto
-               url="http://localhost:3000/api/posts.json"
-               handle-as="json"
-               on-response="handleResponse" on-error="handleError"></iron-ajax>
+    <!--<iron-ajax id="ajax"-->
+               <!--auto-->
+               <!--url="http://localhost:3000/api/posts.json"-->
+               <!--handle-as="json"-->
+               <!--on-response="handleResponse" on-error="handleError"></iron-ajax>-->
   </template>
 </dom-module>
 <script>
@@ -36,18 +36,18 @@
      *
      * @method handleResponse
      */
-    handleResponse: function () {
-      this.data = this.$.ajax.lastResponse;
-    },
-
-    /**
-     * handle error. if error occur on get data it make list null
-     *
-     * @method handleError
-     */
-    handleError: function () {
-      this.data = [];
-    },
+//    handleResponse: function () {
+//      this.data = this.$.ajax.lastResponse;
+//    },
+//
+//    /**
+//     * handle error. if error occur on get data it make list null
+//     *
+//     * @method handleError
+//     */
+//    handleError: function () {
+//      this.data = [];
+//    },
 
     /**
      * Performs slice array.
@@ -64,9 +64,12 @@
      * @method searchData
      */
     searchData: function (input,selectedItems, startIndex, endIndex) {
+
+      console.log(this.data);
+
       var searchResult = [];
       if (input !== '') {
-        searchResult = _.select(this.$.ajax.lastResponse, function (n) {
+        searchResult = _.select(this.data, function (n) {
           return (n.name.toLowerCase().indexOf(input.toLowerCase()) > -1);
         });
       }

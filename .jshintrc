@@ -17,6 +17,7 @@
     "wrap": true,
     "unwrap": true,
     "Polymer": true,
-    "Platform": true
+    "Platform": true,
+    "_": false
   }
 }

@@ -1,14 +1,14 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../bower_components/layout/layout.html">
-<link rel="import" href="../country-service/country-service.html">
+<!--<link rel="import" href="../country-service/country-service.html">-->
 
-<dom-module id="my-app">
+<dom-module id="avocado-comboBox">
 
-  <link rel="stylesheet" href="my-app.css">
+  <link rel="stylesheet" href="../../styles/avocado-comboBox.css">
 
   <template>
-    <country-service id="service" data="{{countryData}}"></country-service>
-    <array-selector id="selector" items="{{countryData}}" selected="{{selected}}" multi toggle></array-selector>
+    <!--<country-service id="service" data="{{data}}"></country-service>-->
+    <array-selector id="selector" items="{{data}}" selected="{{selected}}" multi toggle></array-selector>
 
     <h3>Multi-select</h3>
     <span class="select2-container select2-container--default" dir="ltr" style="width: 360px;">
@@ -25,14 +25,15 @@
         </span>
       </span>
     </span>
-    <div hidden$="{{!isMinChar}}">
-      Please enter 2 or more characters
+    <div id="Loading" hidden$="{{!enabled}}">
+      Loading...
+    </div>
+    <div hidden$="{{checkMinChar(hostValue,minimumInputLength)}}">
+      Please enter <span>{{minimumInputLength}}</span> or more characters
     </div>
     <div id="collapse">
       <iron-collapse fixedSize="true" id="collapse1" opened="{{isOpen}}">
-        <div id="Loading" hidden$="{{!enabled}}">
-          Loading...
-        </div>
+
         <div id="scroll" on-scroll="scrollData">
           <div class="canvas" id="canvas">
             <template is="dom-repeat" items="{{cData}}" id="dataRepeater">
@@ -46,4 +47,6 @@
 
 </dom-module>
 
-<script src="my-app.js"></script>
+
+<script src="../../../bower_components/Faker/build/build/faker.js"></script>
+<script src="../../scripts/avocado-comboBox.js"></script>
