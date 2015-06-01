@@ -4,45 +4,73 @@
 
 <dom-module id="avocado-comboBox">
 
-  <link rel="stylesheet" href="../../styles/avocado-comboBox.css">
+  <!--<link rel="stylesheet" href="../../styles/avocado-comboBox.css">-->
+  <!--<link rel="stylesheet" href="../../styles/avocado-select.css">-->
+  <link rel="stylesheet" href="../../styles/example.css">
 
   <template>
     <!--<country-service id="service" data="{{data}}"></country-service>-->
-    <array-selector id="selector" items="{{data}}" selected="{{selected}}" multi toggle></array-selector>
+    <array-selector id="selector" items="{{data}}" selected="{{selected}}" toggle multi="multi"></array-selector>
+    <!--multi-->
+    <div class="container">
+      <div class$="{{computeClass(multi,searchable,isOpen,focused,disabled,hasValue)}}" on-keydown="handleKeyDown"
+           on-mousedown="handleMouseDown">
+        <input type="hidden" value="">
 
-    <h3>Multi-select</h3>
-    <span class="select2-container select2-container--default" dir="ltr" style="width: 360px;">
-      <span class="selection">
-        <span aria-expanded="false" aria-haspopup="true" aria-autocomplete="list" role="combobox" class="select2-selection select2-selection--multiple" tabindex="0">
-          <ul class="select2-selection__rendered">
+        <div class="Select-control" id="selectControl">
+          <!--<template is="dom-if" if="{{selectPlaceholder(multi,hasValue)}}">-->
+            <div class="Select-placeholder" id="SelectPlaceholder">{{placeholder}}</div>
+          <!--</template>-->
+          <template is="dom-if" if="{{multi}}">
             <template is="dom-repeat" items="{{selected}}" id="selectedRepeater">
-              <li class="select2-selection__choice"><span role="presentation" class="select2-selection__choice__remove" on-click="removeItem">×</span>{{item.name}}</li>
+              <div class="Select-item">
+                <span class="Select-item-icon" on-click="removeItem">×</span>
+                <span class="Select-item-label">
+                  <a class="Select-item-label__a">{{item.name}}</a>
+                </span>
+              </div>
             </template>
-            <li class="select2-search select2-search--inline">
-              <input type="search" role="textbox" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" tabindex="-1" class="select2-search__field" on-input="searchVal" id="search" value="{{hostValue::input}}" disabled$="{{isDisabled}}">
-            </li>
-          </ul>
-        </span>
-      </span>
-    </span>
-    <div id="Loading" hidden$="{{!enabled}}">
-      Loading...
-    </div>
-    <div hidden$="{{checkMinChar(hostValue,minimumInputLength)}}">
-      Please enter <span>{{minimumInputLength}}</span> or more characters
-    </div>
-    <div id="collapse">
-      <iron-collapse fixedSize="true" id="collapse1" opened="{{isOpen}}">
+          </template>
+          <div style="display:inline-block;width:100%;" class="Select-input">
+            <input type="text" style="width:100%;" tabindex="0" id="search" on-input="searchVal"
+                   value="{{hostValue::input}}" on-focus="focusDropDown" on-blur="blurDropDown">
 
-        <div id="scroll" on-scroll="scrollData">
-          <div class="canvas" id="canvas">
-            <template is="dom-repeat" items="{{cData}}" id="dataRepeater">
-              <div on-click="selectOption" class$="{{isSelected(item)}}" style$="{{computeTop(index)}}">{{item.name}}</div>
-            </template>
+            <div
+              style="position: absolute; visibility: hidden; height: 0px; width: 0px; overflow: scroll; white-space: nowrap; font-size: 14px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif;">
+            </div>
           </div>
+          <span class="Select-arrow"></span>
+          <!--<span class="Select-loading" aria-hidden="true" />-->
+          <!--<span aria-label="{{computeCloseLabel(multi,clearValueText,clearAllText)}}" title="{{computeCloseLabel(multi,clearValueText,clearAllText)}}" class="Select-clear">×</span>-->
         </div>
-      </iron-collapse>
+        <iron-collapse opened="{{isOpen}}">
+
+        <!--<template is="dom-if" if="{{isOpen}}">-->
+          <div class="Select-menu-outer">
+            <div class="Select-menu" id="scroll" on-scroll="scrollData">
+              <div class="canvas">
+                <template is="dom-repeat" items="{{cData}}" id="domRepeat" >
+                    <div class="Select-option" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}"><html-echo html="{{convertHTML(resultHTML,item)}}"></html-echo></div>
+                      <!--<table><tr>-->
+                        <!--<td valign="middle"><div class="circular-image"><img src="{{item.avatar}}"></div></td>-->
+                        <!--<td valign="middle">{{item.name}}</td>-->
+                      <!--</tr></table>-->
+                    <!--</div>-->
+                    <!--<template is="dom-repeat" items="{{displayAttr}}" as="val">-->
+                      <!--<div>{{val}}</div>-->
+                    <!--</template>-->
+                  <!--</div>-->
+                </template>
+              </div>
+            </div>
+            <div class="Select-noresults" hidden$="{{noResultFound}}">No results found</div>
+          </div>
+        <!--</template>-->
+        </iron-collapse>
+      </div>
     </div>
+
+
   </template>
 
 </dom-module>
@@ -50,3 +78,4 @@
 
 <script src="../../../bower_components/Faker/build/build/faker.js"></script>
 <script src="../../scripts/avocado-comboBox.js"></script>
+
