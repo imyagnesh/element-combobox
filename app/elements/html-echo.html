@@ -1,9 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="html-echo">
-
-</dom-module>
-
 <script>
   Polymer({
 
@@ -12,14 +8,35 @@
     properties: {
       html: {
         type: String,
-        value: '',
-        observer: 'htmlChanged'
+        value: ''
+      },
+
+      search:{
+        type: String,
+        value: ''
       }
     },
 
-    htmlChanged: function() {
-      // WARNING: potential XSS vulnerability if `html` comes from an untrusted source
-      this.innerHTML = this.html;
+    observers: [
+      'htmlChanged(html, search)'
+    ],
+
+    htmlChanged: function(html, search) {
+      var self = this;
+      var regExp = /<\/?[^>]+>/gi;
+      var res = html.replace(/\{{(.*?)\}}/g, function(x){
+        return item[x]; });
+      self.innerHTML = res;
+      var array = res.replace(regExp,',').split(',').filter(Boolean);
+      _.forEach(array, function(n) {
+        var origin = n;
+        if (search) {
+          n = n.replace(new RegExp('(' + search + ')', 'gi'),
+            '<span class="highlighted">$1</span>');
+          console.log(n);
+          self.innerHTML = self.innerHTML.replace(origin,n);
+        }
+      });
     }
 
   });

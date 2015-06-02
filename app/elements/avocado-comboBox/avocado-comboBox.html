@@ -4,8 +4,6 @@
 
 <dom-module id="avocado-comboBox">
 
-  <!--<link rel="stylesheet" href="../../styles/avocado-comboBox.css">-->
-  <!--<link rel="stylesheet" href="../../styles/avocado-select.css">-->
   <link rel="stylesheet" href="../../styles/example.css">
 
   <template>
@@ -18,15 +16,13 @@
         <input type="hidden" value="">
 
         <div class="Select-control" id="selectControl">
-          <!--<template is="dom-if" if="{{selectPlaceholder(multi,hasValue)}}">-->
-            <div class="Select-placeholder" id="SelectPlaceholder">{{placeholder}}</div>
-          <!--</template>-->
+          <div class="Select-placeholder" id="SelectPlaceholder">{{placeholder}}</div>
           <template is="dom-if" if="{{multi}}">
             <template is="dom-repeat" items="{{selected}}" id="selectedRepeater">
               <div class="Select-item">
                 <span class="Select-item-icon" on-click="removeItem">×</span>
                 <span class="Select-item-label">
-                  <a class="Select-item-label__a">{{item.name}}</a>
+                  <a class="Select-item-label__a"><html-echo html="{{convertHTML(display,item)}}"></html-echo></a>
                 </span>
               </div>
             </template>
@@ -40,32 +36,18 @@
             </div>
           </div>
           <span class="Select-arrow"></span>
-          <!--<span class="Select-loading" aria-hidden="true" />-->
-          <!--<span aria-label="{{computeCloseLabel(multi,clearValueText,clearAllText)}}" title="{{computeCloseLabel(multi,clearValueText,clearAllText)}}" class="Select-clear">×</span>-->
         </div>
         <iron-collapse opened="{{isOpen}}">
-
-        <!--<template is="dom-if" if="{{isOpen}}">-->
           <div class="Select-menu-outer">
             <div class="Select-menu" id="scroll" on-scroll="scrollData">
               <div class="canvas">
                 <template is="dom-repeat" items="{{cData}}" id="domRepeat" >
-                    <div class="Select-option" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}"><html-echo html="{{convertHTML(resultHTML,item)}}"></html-echo></div>
-                      <!--<table><tr>-->
-                        <!--<td valign="middle"><div class="circular-image"><img src="{{item.avatar}}"></div></td>-->
-                        <!--<td valign="middle">{{item.name}}</td>-->
-                      <!--</tr></table>-->
-                    <!--</div>-->
-                    <!--<template is="dom-repeat" items="{{displayAttr}}" as="val">-->
-                      <!--<div>{{val}}</div>-->
-                    <!--</template>-->
-                  <!--</div>-->
+                    <div class="Select-option" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}"><html-echo html="{{convertHTML(resultHTML,item)}}" search="{{hostValue}}"></html-echo></div>
                 </template>
               </div>
             </div>
             <div class="Select-noresults" hidden$="{{noResultFound}}">No results found</div>
           </div>
-        <!--</template>-->
         </iron-collapse>
       </div>
     </div>

@@ -16,7 +16,8 @@
           var data = [];
           for (var i = 0; i < 10000; i++) {
             data.push({
-              name: faker.name.findName(),
+              firstName: faker.name.firstName(),
+              lastName: faker.name.lastName(),
               avatar: faker.internet.avatar()
             });
           }
@@ -24,8 +25,24 @@
         }
       },
 
-      displayAttr:{
-        type: Array
+      height: {
+        type: Number,
+        value: 200
+      },
+
+      display:{
+        type: String,
+        value: '{{firstName}} {{lastName}}'
+      },
+
+      rowHeight: {
+        type: Number,
+        value: 40
+      },
+
+      cellsPerPage: {
+        type: Number,
+        computed: 'computeCellsPerPage(height, rowHeight)'
       },
 
       multi: {
@@ -116,40 +133,13 @@
         notify: true
       },
 
-      /**
-       * set height of div.
-       */
-      rowHeight: {
-        type: Number,
-        value: 40
-      },
-
-      /**
-       * height of combo-box.
-       */
-      height: {
-        type: Number,
-        value: 200
-      },
-      /**
-       * Initial position of scroll.
-       */
       scrollTop: {
         type: Number,
         value: 0,
         notify: true,
         observer: 'changeScrollPosition'
       },
-      /**
-       * will set cells per page.
-       */
-      cellsPerPage: {
-        type: Number,
-        computed: 'computeCellsPerPage(height, rowHeight)'
-      },
-      /**
-       * it update the total number of cells depend on ccount
-       */
+
       numberOfCells: {
         type: Number,
         computed: 'computeNumberOfCells(cellsPerPage)'
@@ -174,8 +164,10 @@
 
       resultHTML:{
         type: String,
-        value: '<table><tr><td valign="middle"><div class="circular-image"><img src="{{avatar}}"></div></td><td valign="middle">{{name}}</td></tr></table>'
+        value: '<table><tr><td valign="middle"><div class="circular-image"><img src="{{avatar}}"></div></td><td valign="middle">{{firstName}} {{lastName}}</td></tr></table>'
       }
+
+
 
     },
 
@@ -189,61 +181,40 @@
     },
 
     changeHostValue: function (newValue) {
-      if(newValue.length > 0)
-      {
-        this.$$('#SelectPlaceholder').innerHTML = '';
-        //this.placeholder = '';
+      var placeholder = Polymer.dom(this.root).querySelector('#SelectPlaceholder');
+      if (this.hasValue || newValue.length > 0) {
+        placeholder.innerHTML = '';
       }
-      else
-      {
-        this.$$('#SelectPlaceholder').innerHTML = this.placeholder;
-        //this.placeholder = this.placeholderText;
+      else {
+        placeholder.innerHTML = this.placeholder;
       }
-    },
-
-    selectPlaceholder: function (multi,hasValue) {
-      if(multi && !hasValue)
-      {
-        return true;
-      }
-      if(!multi)
-      {
-        return true;
-      }
-      return false;
     },
 
     changeIsOpen: function (newValue) {
       this.toggleSelectClass('is-open', newValue);
+      this.$.scroll.scrollTop = 0;
+      this.scrollTop = 0;
+      Polymer.dom(this.root).querySelector('#search').focus();
     },
 
     changeHasValue: function (newValue) {
       var self = this;
+      var placeholder = Polymer.dom(this.root).querySelector('#SelectPlaceholder');
       self.toggleSelectClass('has-value', newValue);
       if (newValue) {
-        this.$$('#SelectPlaceholder').innerHTML = '';
         var clearSelection = document.createElement('span');
         clearSelection.setAttribute('title', self.multi ? self.clearAllText : self.clearValueText);
         clearSelection.setAttribute('class', 'Select-clear');
         clearSelection.setAttribute('id', 'clearAll');
         clearSelection.innerHTML = '×';
         clearSelection.addEventListener('click', function() {
-          self.$$('#SelectPlaceholder').innerHTML = self.placeholder;
-          //self.placeholder = self.placeholderText;
-          if(self.multi)
-          {
-            self.selected = [];
-          }
-          else
-          {
-            self.$.selector.deselect(self.selected);
-          }
           self.hasValue = false;
         });
         Polymer.dom(self.$.selectControl).appendChild(clearSelection);
       }
       else {
-        this.$$('#SelectPlaceholder').innerHTML = this.placeholder;
+        self.selected = [];
+        placeholder.innerHTML = this.placeholder;
         var clearSelection = Polymer.dom(self.root).querySelector('span.Select-clear');
         if (clearSelection)
           Polymer.dom(self.$.selectControl).removeChild(clearSelection);
@@ -266,7 +237,7 @@
       event.preventDefault();
 
       this.isOpen = true;
-      Polymer.dom(this.root).querySelector('#search').focus();
+
     },
 
     handleKeyDown: function (event) {
@@ -374,14 +345,6 @@
       return (hostValue.length >= minimumInputLength);
     },
 
-    //ready: function () {
-    //
-    //  if (this.isDisabled) {
-    //    var ironSelector = Polymer.dom(this.root).querySelector('span.select2-container');
-    //    ironSelector.classList.add('select2-container--disabled');
-    //  }
-    //},
-
     searchVal: function () {
       //if (this.hostValue.length >= this.minimumInputLength) {
       var myApp = this;
@@ -419,17 +382,16 @@
     selectOption: function (e) {
       var item = Polymer.dom(this.root).querySelector('#domRepeat').itemForElement(e.target);
       this.$.selector.select(item);
+      var placeholder = Polymer.dom(this.root).querySelector('#SelectPlaceholder');
       if(this.multi)
       {
+        placeholder.innerHTML = '';
         this.changeScrollPosition(this.$.scroll.scrollTop);
       }
       else
       {
-        this.$$('#SelectPlaceholder').innerHTML = item.name;
-        //this.placeholder = item.name;
+        placeholder.innerHTML = this.display.replace(/\{{(.*?)\}}/g, function(g0,g1){ return item[g1]; });
         this.isOpen = false;
-        this.scrollTop = 0;
-        this.$.scroll.scrollTop = 0;
       }
       this.hostValue = '';
       this.hasValue = true;
@@ -445,7 +407,6 @@
     },
 
     changeScrollPosition: function (newValue, oldValue) {
-      if (oldValue !== newValue) {
         var firstCell = Math.max(Math.floor(newValue / this.rowHeight) - this.cellsPerPage, 0);
         var cellsToCreate = Math.min(firstCell + this.numberOfCells, this.numberOfCells);
         var searchResult = this.searchData(this.hostValue, this.selected, firstCell, firstCell + cellsToCreate);
@@ -462,27 +423,14 @@
         for (var i = 0; i < childNodes.length; i++) {
           childNodes[i].setAttribute('style', 'top: ' + ((firstCell + i) * this.rowHeight) + 'px;');
         }
-      }
     },
 
-    //openDropDown: function (e) {
-    //  var ddl = Polymer.dom(this.root).querySelector('span.select2');
-    //  ddl.classList.toggle('select2-container--below');
-    //  ddl.classList.toggle('select2-container--open');
-    //  options = Polymer.dom(this.root).querySelector('iron-collapse>span.select2-container--open');
-    //  options.setAttribute('style', 'position: absolute;top: '+ e.target.offsetParent.offsetTop + e.target.offsetParent.offsetHeight +';left: '+e.target.offsetParent.offsetLeft +';');
-    //  this.isOpen = !this.isOpen;
-    //  this.hostValue = '';
-    //  this.scrollTop = 0;
-    //  this.$.scroll.scrollTop = 0;
-    //},
-
     searchData: function (input, selectedItems, startIndex, endIndex) {
-
       var searchResult = [];
-      //if (input !== '') {
+      var display = this.display;
       searchResult = _.select(this.data, function (n) {
-        return (n.name.toLowerCase().indexOf(input.toLowerCase()) > -1);
+        var selectString = display.replace(/\{{(.*?)\}}/g, function(g0,g1){ return n[g1]; });
+        return (selectString.toLowerCase().indexOf(input.toLowerCase()) > -1);
       });
       //}
 

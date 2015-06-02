@@ -366,3 +366,8 @@ label {
   -o-border-radius: 15px;
   border-radius: 15px;
 }
+
+
+.highlighted{
+  background-color: orange;
+}
