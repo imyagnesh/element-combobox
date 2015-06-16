@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://D:/Avacado/avocado-web-dev-ui/avocado-web-dev-ui/src/main/web/app/elements/elements.html" charset="UTF-8" />
+    <file url="file://D:/Avacado/avocado-web-dev-ui/avocado-web-dev-ui/src/main/web/app/scripts/app.js" charset="UTF-8" />
+    <file url="file://D:/Avacado/avocado-web-dev-ui/avocado-web-dev-ui/src/main/web/bower.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/.jshintrc" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Api/posts.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/elements/avocado-comboBox/avocado-comboBox.html" charset="UTF-8" />

@@ -62,7 +62,7 @@
 
       clearable: {
         type: Boolean,
-        value: true
+        value:false
       },
 
       placeholder: {
@@ -106,9 +106,10 @@
         value: false
       },
 
-      isFocused: {
+      focused: {
         type: Boolean,
-        value: false
+        value: false,
+        observer: 'changeFocus'
       },
 
       focusedOption: {
@@ -164,7 +165,7 @@
 
       resultHTML:{
         type: String,
-        value: '<table><tr><td valign="middle"><div class="circular-image"><img src="{{avatar}}"></div></td><td valign="middle">{{firstName}} {{lastName}}</td></tr></table>'
+        value: '<table><tr><td valign="middle"><div class="circular-image"><img src="{{avatar}}"></div></td><td valign="middle">{{firstName}}</td><td valign="middle">{{lastName}}</td></tr></table>'
       }
 
 
@@ -178,6 +179,10 @@
 
     isMulti: function (multi) {
       return multi;
+    },
+
+    changeFocus: function (newValue) {
+      this.toggleSelectClass('is-focused', newValue);
     },
 
     changeHostValue: function (newValue) {
@@ -201,7 +206,7 @@
       var self = this;
       var placeholder = Polymer.dom(this.root).querySelector('#SelectPlaceholder');
       self.toggleSelectClass('has-value', newValue);
-      if (newValue) {
+      if (newValue && self.clearable) {
         var clearSelection = document.createElement('span');
         clearSelection.setAttribute('title', self.multi ? self.clearAllText : self.clearValueText);
         clearSelection.setAttribute('class', 'Select-clear');
@@ -296,24 +301,25 @@
 
     onHovered: function (e) {
       this.focusedOption = true;
-      e.target.classList.toggle('is-focused');
+      e.target.parentNode.classList.toggle('is-focused');
     },
 
     onUnhovered: function (e) {
       this.focusedOption = false;
-      e.target.classList.toggle('is-focused');
+      e.target.parentNode.classList.toggle('is-focused');
     },
 
     focusDropDown: function () {
-      this.isFocused = true;
-      this.toggleSelectClass('is-focused', true);
+      this.focused = true;
+      Polymer.dom(this.root).querySelector('#search').focus();
     },
 
     blurDropDown: function (e) {
       var self = this;
       var _blurTimeout = setTimeout(function () {
         //if (true) return;
-        self.toggleSelectClass('is-focused', false);
+        self.focused = false;
+        //self.toggleSelectClass('is-focused', false);
         self.isOpen = false;
       }, 50);
     },

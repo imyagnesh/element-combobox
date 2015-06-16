@@ -28,7 +28,7 @@
             </template>
           </template>
           <div style="display:inline-block;width:100%;" class="Select-input">
-            <input type="text" style="width:100%;" tabindex="0" id="search" on-input="searchVal"
+            <input type="text" style="width:100%;" autofocus="false" tabindex="0" id="search" on-input="searchVal"
                    value="{{hostValue::input}}" on-focus="focusDropDown" on-blur="blurDropDown">
 
             <div
@@ -42,7 +42,9 @@
             <div class="Select-menu" id="scroll" on-scroll="scrollData">
               <div class="canvas">
                 <template is="dom-repeat" items="{{cData}}" id="domRepeat" >
-                    <div class="Select-option" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}"><html-echo html="{{convertHTML(resultHTML,item)}}" search="{{hostValue}}"></html-echo></div>
+                    <div class="Select-option" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}">
+                      <html-echo html="{{convertHTML(resultHTML,item)}}" search="{{hostValue}}"></html-echo>
+                    </div>
                 </template>
               </div>
             </div>
