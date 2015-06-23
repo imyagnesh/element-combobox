@@ -11,18 +11,11 @@
 
       data: {
         type: Array,
-        //notify: false,
-        value: function () {
-          var data = [];
-          for (var i = 0; i < 10000; i++) {
-            data.push({
-              firstName: faker.name.firstName(),
-              lastName: faker.name.lastName(),
-              avatar: faker.internet.avatar()
-            });
-          }
-          return data;
-        }
+        value: []
+      },
+
+      dataUrl:{
+        type: String
       },
 
       height: {
@@ -32,7 +25,7 @@
 
       display:{
         type: String,
-        value: '{{firstName}} {{lastName}}'
+        value: ''
       },
 
       rowHeight: {
@@ -166,10 +159,19 @@
       resultHTML:{
         type: String,
         value: '<table><tr><td valign="middle"><div class="circular-image"><img src="{{avatar}}"></div></td><td valign="middle">{{firstName}}</td><td valign="middle">{{lastName}}</td></tr></table>'
+      },
+
+      selected: {
+        type: Object,
+        notify: true
       }
 
 
 
+    },
+
+    ready: function () {
+        console.log(this.data);
     },
 
     convertHTML: function (resultHTML,item) {

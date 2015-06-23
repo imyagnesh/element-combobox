@@ -3,18 +3,14 @@
 <!--<link rel="import" href="../country-service/country-service.html">-->
 
 <dom-module id="avocado-comboBox">
-
   <link rel="stylesheet" href="../../styles/example.css">
-
   <template>
     <!--<country-service id="service" data="{{data}}"></country-service>-->
     <array-selector id="selector" items="{{data}}" selected="{{selected}}" toggle multi="multi"></array-selector>
     <!--multi-->
-    <div class="container">
       <div class$="{{computeClass(multi,searchable,isOpen,focused,disabled,hasValue)}}" on-keydown="handleKeyDown"
            on-mousedown="handleMouseDown">
         <input type="hidden" value="">
-
         <div class="Select-control" id="selectControl">
           <div class="Select-placeholder" id="SelectPlaceholder">{{placeholder}}</div>
           <template is="dom-if" if="{{multi}}">
@@ -30,7 +26,6 @@
           <div style="display:inline-block;width:100%;" class="Select-input">
             <input type="text" style="width:100%;" autofocus="false" tabindex="0" id="search" on-input="searchVal"
                    value="{{hostValue::input}}" on-focus="focusDropDown" on-blur="blurDropDown">
-
             <div
               style="position: absolute; visibility: hidden; height: 0px; width: 0px; overflow: scroll; white-space: nowrap; font-size: 14px; font-family: Helvetica Neue,Helvetica,Arial,sans-serif;">
             </div>
@@ -52,14 +47,9 @@
           </div>
         </iron-collapse>
       </div>
-    </div>
-
-
   </template>
-
 </dom-module>
 
 
-<script src="../../../bower_components/Faker/build/build/faker.js"></script>
 <script src="../../scripts/avocado-comboBox.js"></script>
 

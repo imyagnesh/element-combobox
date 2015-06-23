@@ -23,18 +23,64 @@
 </head>
 
 <body>
-  <div class="container">
-    <h1>Avocado Combobox</h1>
-    <p>
-      A Flexible and beautiful combobox with multiselect
-    </p>
-    <h3><a href="#">View Project on Github</a></h3>
-    <h2>Examples</h2>
-    <h1>clearable</h1>
-    <avocado-comboBox clearable="true" focused="true"></avocado-comboBox>
-    <avocado-comboBox multi="true" displayAttr="['name']" focused="false"></avocado-comboBox>
-  </div>
-    <!--<avocado-comboBox></avocado-comboBox>-->
+<template is="dom-bind" id="app">
+  <label>clearable</label>
+  <avocado-comboBox data="{{data}}" display="{{display}}" clearable="true" clear-value-text="clear data"></avocado-comboBox>
+  <!--<div class="container">-->
+    <!--<h1>Avocado Combobox</h1>-->
+
+    <!--<p>-->
+      <!--A Flexible and beautiful combobox with multiselect-->
+    <!--</p>-->
+
+    <!--<h3><a href="#">View Project on Github</a></h3>-->
+
+    <!--<h2>Examples</h2>-->
+
+    <!--<form>-->
+      <!--<div id="example">-->
+        <!--<div>-->
+          <!--<label>clearable</label>-->
+          <!--<avocado-comboBox data="{{data}}" display="{{display}}" clearable="true" clear-value-text="clear data"></avocado-comboBox>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<label>clearable</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" selected="" clearable="true"&ndash;&gt;-->
+                            <!--&lt;!&ndash;clear-value-text="clear data"></avocado-comboBox>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<label>not clearable</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}"  display="{{display}}"></avocado-comboBox>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<label>disabled</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" disabled="true"></avocado-comboBox>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<label>is-open</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" is-open="true"></avocado-comboBox>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<label>placeholder</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" placeholder="Please Select Data..."></avocado-comboBox>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<label>placeholder</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" placeholder="Please Select Data..."></avocado-comboBox>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<label>multi</label>&ndash;&gt;-->
+          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" multi="true" displayAttr="['name']"&ndash;&gt;-->
+                            <!--&lt;!&ndash;focused="false"></avocado-comboBox>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--</div>-->
+    <!--</form>-->
+  <!--</div>-->
+  <!--<avocado-comboBox></avocado-comboBox>-->
+</template>
+
+<script src="../bower_components/Faker/build/build/faker.js"></script>
+<script src="scripts/app.js"></script>
 </body>
 
 </html>

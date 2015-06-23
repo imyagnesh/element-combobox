@@ -10,6 +10,13 @@ var pagespeed = require('psi');
 var reload = browserSync.reload;
 var merge = require('merge-stream');
 var path = require('path');
+var uglify = require('gulp-uglify');
+
+gulp.task('compress', function() {
+  return gulp.src('app/scripts/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist'));
+});
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
