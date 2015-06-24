@@ -24,7 +24,7 @@
     htmlChanged: function(html, search) {
       var self = this;
       var regExp = /<\/?[^>]+>/gi;
-      var res = html.replace(/\{{(.*?)\}}/g, function(x){
+      var res = html.replace(/\{(.*?)\}/g, function(x){
         return item[x]; });
       self.innerHTML = res;
       var array = res.replace(regExp,',').split(',').filter(Boolean);

@@ -37,9 +37,7 @@
             <div class="Select-menu" id="scroll" on-scroll="scrollData">
               <div class="canvas">
                 <template is="dom-repeat" items="{{cData}}" id="domRepeat" >
-                    <div class="Select-option" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}">
-                      <html-echo html="{{convertHTML(resultHTML,item)}}" search="{{hostValue}}"></html-echo>
-                    </div>
+                    <html-echo class$="{{checkDisable(item)}}" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}" html="{{convertHTML(html,item)}}" search="{{hostValue}}"></html-echo>
                 </template>
               </div>
             </div>

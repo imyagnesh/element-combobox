@@ -11,12 +11,24 @@
 
       data: {
         type: Array,
-        value: []
+        observer: 'dataChanged'
       },
 
-      dataUrl:{
-        type: String
+      key:{
+        type: String,
+        value: ''
       },
+
+      disabledItem:{
+        type: String,
+        value: ''
+      },
+
+      selectedItem:{
+        type: String,
+        value: ''
+      },
+
 
       height: {
         type: Number,
@@ -44,11 +56,6 @@
       },
 
       searchable: {
-        type: Boolean,
-        value: true
-      },
-
-      focused: {
         type: Boolean,
         value: true
       },
@@ -156,9 +163,8 @@
         value: false
       },
 
-      resultHTML:{
-        type: String,
-        value: '<table><tr><td valign="middle"><div class="circular-image"><img src="{{avatar}}"></div></td><td valign="middle">{{firstName}}</td><td valign="middle">{{lastName}}</td></tr></table>'
+      html:{
+        type: String
       },
 
       selected: {
@@ -170,13 +176,25 @@
 
     },
 
-    ready: function () {
-        console.log(this.data);
+    dataChanged: function (newValue) {
+      var self = this;
+      self.changeScrollPosition(0);
+      var selectedItem = self.selectedItem.split(',');
+      var disabledItem = self.disabledItem.split(',');
+      _.forEach(self.data, function(n) {
+        if (selectedItem.indexOf(n[self.key]) !== -1 && disabledItem.indexOf(n[self.key]) === -1) {
+            self.selectItem(n);
+        }
+      });
     },
 
-    convertHTML: function (resultHTML,item) {
-      var res = resultHTML.replace(/\{{(.*?)\}}/g, function(g0,g1){ return item[g1]; });
+    convertHTML: function (html,item) {
+      var res = html.replace(/\{(.*?)\}/g, function(g0,g1){ return item[g1]; });
       return res;
+    },
+
+    setSelectedItem: function (newValue) {
+
     },
 
     isMulti: function (multi) {
@@ -220,7 +238,7 @@
         Polymer.dom(self.$.selectControl).appendChild(clearSelection);
       }
       else {
-        self.selected = [];
+        //self.selected = [];
         placeholder.innerHTML = this.placeholder;
         var clearSelection = Polymer.dom(self.root).querySelector('span.Select-clear');
         if (clearSelection)
@@ -303,12 +321,12 @@
 
     onHovered: function (e) {
       this.focusedOption = true;
-      e.target.parentNode.classList.toggle('is-focused');
+      e.target.closest(".Select-option").classList.toggle('is-focused');
     },
 
     onUnhovered: function (e) {
       this.focusedOption = false;
-      e.target.parentNode.classList.toggle('is-focused');
+      e.target.closest(".Select-option").classList.toggle('is-focused');
     },
 
     focusDropDown: function () {
@@ -346,6 +364,17 @@
         classString += ' is-disabled';
       if (hasValue)
         classString += ' has-value';
+      return classString;
+    },
+
+    checkDisable: function (item) {
+      var classString = 'Select-option';
+      if(this.key !== '' && this.disabledItem !== '') {
+        var array = this.disabledItem.split(',');
+        if (array.indexOf(item[this.key]) !== -1) {
+          classString += ' is-disabled';
+        }
+      }
       return classString;
     },
 
@@ -388,17 +417,29 @@
     },
 
     selectOption: function (e) {
-      var item = Polymer.dom(this.root).querySelector('#domRepeat').itemForElement(e.target);
+      if(!e.target.closest(".Select-option").classList.contains('is-disabled')) {
+        var item = Polymer.dom(this.root).querySelector('#domRepeat').itemForElement(e.target);
+        this.selectItem(item);
+      }
+    },
+
+    findAncestor: function (el, cls) {
+      while ((el = el.parentElement) && !el.classList.contains(cls));
+      return el;
+    },
+
+
+      selectItem: function (item) {
       this.$.selector.select(item);
       var placeholder = Polymer.dom(this.root).querySelector('#SelectPlaceholder');
-      if(this.multi)
-      {
+      if (this.multi) {
         placeholder.innerHTML = '';
         this.changeScrollPosition(this.$.scroll.scrollTop);
       }
-      else
-      {
-        placeholder.innerHTML = this.display.replace(/\{{(.*?)\}}/g, function(g0,g1){ return item[g1]; });
+      else {
+        placeholder.innerHTML = this.display.replace(/\{(.*?)\}/g, function (g0, g1) {
+          return item[g1];
+        });
         this.isOpen = false;
       }
       this.hostValue = '';
@@ -427,7 +468,7 @@
         this.cData = searchResult.data;
         var ironSelector = Polymer.dom(this.root).querySelector('div.canvas');
         ironSelector.setAttribute('style', 'height: ' + searchResult.totalCount * this.rowHeight + 'px;');
-        var childNodes = Polymer.dom(this.root).querySelectorAll('div.Select-option');
+        var childNodes = Polymer.dom(this.root).querySelectorAll('html-echo.Select-option');
         for (var i = 0; i < childNodes.length; i++) {
           childNodes[i].setAttribute('style', 'top: ' + ((firstCell + i) * this.rowHeight) + 'px;');
         }
@@ -437,7 +478,7 @@
       var searchResult = [];
       var display = this.display;
       searchResult = _.select(this.data, function (n) {
-        var selectString = display.replace(/\{{(.*?)\}}/g, function(g0,g1){ return n[g1]; });
+        var selectString = display.replace(/\{(.*?)\}/g, function(g0,g1){ return n[g1]; });
         return (selectString.toLowerCase().indexOf(input.toLowerCase()) > -1);
       });
       //}

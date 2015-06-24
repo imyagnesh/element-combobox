@@ -15,6 +15,7 @@
   <!-- build:js bower_components/webcomponentsjs/webcomponents.min.js -->
   <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <script src="../bower_components/lodash/lodash.js"></script>
+
   <!-- endbuild -->
 
   <!-- will be replaced with elements/elements.vulcanized.html -->
@@ -24,63 +25,272 @@
 
 <body>
 <template is="dom-bind" id="app">
-  <label>clearable</label>
-  <avocado-comboBox data="{{data}}" display="{{display}}" clearable="true" clear-value-text="clear data"></avocado-comboBox>
-  <!--<div class="container">-->
-    <!--<h1>Avocado Combobox</h1>-->
+  <div class="container">
+    <h1>Avocado Combobox</h1>
 
-    <!--<p>-->
-      <!--A Flexible and beautiful combobox with multiselect-->
-    <!--</p>-->
+    <p>
+      A Flexible and beautiful combobox with multiselect
+    </p>
 
-    <!--<h3><a href="#">View Project on Github</a></h3>-->
+    <h3><a href="#">View Project on Github</a></h3>
 
-    <!--<h2>Examples</h2>-->
+    <h2>Examples</h2>
 
-    <!--<form>-->
-      <!--<div id="example">-->
-        <!--<div>-->
-          <!--<label>clearable</label>-->
-          <!--<avocado-comboBox data="{{data}}" display="{{display}}" clearable="true" clear-value-text="clear data"></avocado-comboBox>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<label>clearable</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" selected="" clearable="true"&ndash;&gt;-->
-                            <!--&lt;!&ndash;clear-value-text="clear data"></avocado-comboBox>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<label>not clearable</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}"  display="{{display}}"></avocado-comboBox>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<label>disabled</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" disabled="true"></avocado-comboBox>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<label>is-open</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" is-open="true"></avocado-comboBox>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<label>placeholder</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" placeholder="Please Select Data..."></avocado-comboBox>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<label>placeholder</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" placeholder="Please Select Data..."></avocado-comboBox>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<label>multi</label>&ndash;&gt;-->
-          <!--&lt;!&ndash;<avocado-comboBox data="{{data}}" display="{{display}}" multi="true" displayAttr="['name']"&ndash;&gt;-->
-                            <!--&lt;!&ndash;focused="false"></avocado-comboBox>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--</div>-->
-    <!--</form>-->
-  <!--</div>-->
-  <!--<avocado-comboBox></avocado-comboBox>-->
+    <form>
+      <person-list data="{{personList}}"></person-list>
+      <iron-ajax auto url="../api/posts.json"
+                 handle-as="json" last-response="{{response}}"></iron-ajax>
+      <div id="example">
+        <div>
+          <label>Noraml</label>
+
+          <avocado-comboBox data="{{personList}}"
+                            display="{firstName}"
+                            disabled="{{isDisable}}"
+
+                            html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName}</td><td valign='middle'>{lastName}</td></tr></table>">
+          </avocado-comboBox>
+          <paper-checkbox checked="{{isDisable}}">Disable</paper-checkbox>
+        </div>
+
+
+        <div>
+          <label>clearable</label>
+          <avocado-comboBox data="{{personList}}"
+                            display="{firstName}"
+                            html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName}</td><td valign='middle'>{lastName}</td></tr></table>"
+                            clearable="true">
+          </avocado-comboBox>
+        </div>
+        <div>
+          <label>disabled</label>
+          <avocado-comboBox data="{{response}}"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name}</td><td valign='middle'>{code}</td></tr></table>"
+                            disabled="true"
+                            key="name"
+                            selected-item="Antarctica"></avocado-comboBox>
+        </div>
+        <div>
+          <label>is-open</label>
+          <avocado-comboBox data="{{personList}}"
+                            display="{firstName}"
+                            html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName}</td><td valign='middle'>{lastName}</td></tr></table>"
+                            is-open="true">
+          </avocado-comboBox>
+        </div>
+        <div>
+          <label>placeholder</label>
+          <avocado-comboBox data="{{response}}"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name}</td><td valign='middle'>{code}</td></tr></table>"
+                            placeholder="Please Select Data..."></avocado-comboBox>
+        </div>
+        <div>
+          <label>selected items</label>
+          <avocado-comboBox data="{{response}}"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name}</td><td valign='middle'>{code}</td></tr></table>"
+                            key="name"
+                            multi="true"
+                            selected-item="AndorrA,Antarctica">
+          </avocado-comboBox>
+        </div>
+
+        <div>
+          <label>disable items</label>
+          <avocado-comboBox data="{{response}}"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name}</td><td valign='middle'>{code}</td></tr></table>"
+                            key="name"
+                            multi="true"
+                            disabled-item="Afghanistan,Albania">
+          </avocado-comboBox>
+        </div>
+      </div>
+    </form>
+    <label>Property Details</label>
+    <table width="100%" >
+      <thead style="border-bottom: 1px black dashed;">
+      <tr>
+        <td>
+          #
+        </td>
+        <td>
+          Property Name
+        </td>
+        <td>
+          Property Type
+        </td>
+        <td>
+          Default
+        </td>
+        <td>
+          Mandatory
+        </td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          1
+        </td>
+        <td>
+          data
+        </td>
+        <td>
+          Array
+        </td>
+        <td>
+          null
+        </td>
+        <td>
+          Yes
+        </td>
+      </tr>
+      <tr>
+        <td>
+          2
+        </td>
+        <td>
+          html
+        </td>
+        <td>
+          String
+        </td>
+        <td>
+          null
+        </td>
+        <td>
+          Yes
+        </td>
+      </tr>
+      <tr>
+        <td>
+          3
+        </td>
+        <td>
+          display
+        </td>
+        <td>
+          String
+        </td>
+        <td>
+          ''
+        </td>
+        <td>
+          Yes
+        </td>
+      </tr>
+      <tr>
+        <td>
+          4
+        </td>
+        <td>
+          key
+        </td>
+        <td>
+          String
+        </td>
+        <td>
+          ''
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      <tr>
+        <td>
+          5
+        </td>
+        <td>
+          disabledItem
+        </td>
+        <td>
+          String
+        </td>
+        <td>
+          ''
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      <tr>
+        <td>
+          6
+        </td>
+        <td>
+          selectedItem
+        </td>
+        <td>
+          String
+        </td>
+        <td>
+          ''
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      <tr>
+        <td>
+          7
+        </td>
+        <td>
+          height
+        </td>
+        <td>
+          Number
+        </td>
+        <td>
+          200
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      <tr>
+        <td>
+          8
+        </td>
+        <td>
+          rowHeight
+        </td>
+        <td>
+          Number
+        </td>
+        <td>
+          40
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      <tr>
+        <td>
+          9
+        </td>
+        <td>
+          multi
+        </td>
+        <td>
+          Boolean
+        </td>
+        <td>
+          false
+        </td>
+        <td>
+          No
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
-<script src="../bower_components/Faker/build/build/faker.js"></script>
-<script src="scripts/app.js"></script>
+
+<!--<script src="scripts/app.js"></script>-->
 </body>
 
 </html>
