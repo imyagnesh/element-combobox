@@ -11,6 +11,7 @@ var reload = browserSync.reload;
 var merge = require('merge-stream');
 var path = require('path');
 var uglify = require('gulp-uglify');
+var install = require("gulp-install");
 
 gulp.task('compress', function() {
   return gulp.src('app/scripts/*.js')
@@ -46,6 +47,12 @@ var styleTask = function (stylesPath, srcs) {
 gulp.task('styles', function () {
   return styleTask('styles', ['**/*.css']);
 });
+
+gulp.task('installBower', function () {
+  return gulp.src(['./bower.json', './package.json'])
+    .pipe(install());
+});
+
 
 gulp.task('elements', function () {
   return styleTask('elements', ['**/*.css']);
@@ -93,11 +100,14 @@ gulp.task('copy', function () {
   var elements = gulp.src(['app/elements/**/*.html'])
     .pipe(gulp.dest('dist/elements'));
 
+  var js = gulp.src(['app/elements/**/*.js'])
+    .pipe(gulp.dest('dist/elements'));
+
   var vulcanized = gulp.src(['app/elements/elements.html'])
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, vulcanized).pipe($.size({title: 'copy'}));
+  return merge(app, bower, elements,js, vulcanized).pipe($.size({title: 'copy'}));
 });
 
 // Copy Web Fonts To Dist
@@ -188,6 +198,7 @@ gulp.task('serve:dist', ['default'], function () {
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
+    ['installBower'],
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
@@ -200,7 +211,7 @@ gulp.task('default', ['clean'], function (cb) {
 gulp.task('pagespeed', function (cb) {
   // Update the below URL to the public URL of your site
   pagespeed.output('example.com', {
-    strategy: 'mobile',
+    strategy: 'mobile'
     // By default we use the PageSpeed Insights free (no API key) tier.
     // Use a Google Developer API key if you have one: http://goo.gl/RkN0vE
     // key: 'YOUR_API_KEY'

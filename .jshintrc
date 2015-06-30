@@ -18,6 +18,7 @@
     "unwrap": true,
     "Polymer": true,
     "Platform": true,
-    "_": false
+    "_": false,
+    "faker": false
   }
 }

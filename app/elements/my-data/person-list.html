@@ -22,7 +22,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 <script src="../../../bower_components/Faker/build/build/faker.js"></script>
 <script>
-(function() {
+(function(faker) {
   Polymer({
     is: 'person-list',
 
@@ -43,7 +43,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     generateData: function () {
       var data= [];
-        for(var i = 0; i < 10000; i++)
+        for(var i = 0; i < 10; i++)
         {
           data.push({
             firstName: faker.name.firstName(),
@@ -54,6 +54,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return data;
     }
   });
-})();
+})(faker);
 </script>
 

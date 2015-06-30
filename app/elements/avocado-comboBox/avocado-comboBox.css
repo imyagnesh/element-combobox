@@ -278,10 +278,15 @@ label {
   border-bottom-right-radius: 4px;
 }
 
-.Select-option.is-focused {
+.Select-option:hover{
   background-color: #f2f9fc;
   color: #333333;
 }
+
+/*.Select-option.is-focused {*/
+  /*background-color: #f2f9fc;*/
+  /*color: #333333;*/
+/*}*/
 
 .Select-option.is-disabled {
   color: #cccccc;

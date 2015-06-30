@@ -1,9 +1,8 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../bower_components/layout/layout.html">
 <!--<link rel="import" href="../country-service/country-service.html">-->
 
 <dom-module id="avocado-comboBox">
-  <link rel="stylesheet" href="../../styles/example.css">
+  <link rel="stylesheet" href="avocado-comboBox.css">
   <template>
     <!--<country-service id="service" data="{{data}}"></country-service>-->
     <array-selector id="selector" items="{{data}}" selected="{{selected}}" toggle multi="multi"></array-selector>
@@ -37,7 +36,8 @@
             <div class="Select-menu" id="scroll" on-scroll="scrollData">
               <div class="canvas">
                 <template is="dom-repeat" items="{{cData}}" id="domRepeat" >
-                    <html-echo class$="{{checkDisable(item)}}" on-mouseover="onHovered" on-mouseout="onUnhovered" on-click="selectOption" style$="{{computeTop(index)}}" html="{{convertHTML(html,item)}}" search="{{hostValue}}"></html-echo>
+                    <html-echo class$="{{checkDisable(item)}}" on-click="selectOption" style$="{{computeTop(index)}}" html="{{convertHTML(html,item)}}" search="{{hostValue}}"></html-echo>
+                  <!--on-mouseover="onHovered" on-mouseout="onUnhovered"-->
                 </template>
               </div>
             </div>
@@ -49,5 +49,5 @@
 </dom-module>
 
 
-<script src="../../scripts/avocado-comboBox.js"></script>
+<script src="avocado-comboBox.js"></script>
 

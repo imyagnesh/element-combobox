@@ -1,5 +1,6 @@
 (function () {
 
+
   var typingTimer;                //timer identifier
   var doneTypingInterval = 250;  //time in ms, 5 second for example
 
@@ -176,7 +177,7 @@
 
     },
 
-    dataChanged: function (newValue) {
+    dataChanged: function () {
       var self = this;
       self.changeScrollPosition(0);
       var selectedItem = self.selectedItem.split(',');
@@ -193,9 +194,9 @@
       return res;
     },
 
-    setSelectedItem: function (newValue) {
-
-    },
+    //setSelectedItem: function (newValue) {
+    //
+    //},
 
     isMulti: function (multi) {
       return multi;
@@ -225,24 +226,27 @@
     changeHasValue: function (newValue) {
       var self = this;
       var placeholder = Polymer.dom(this.root).querySelector('#SelectPlaceholder');
+      var clearSelection = null;
       self.toggleSelectClass('has-value', newValue);
-      if (newValue && self.clearable) {
-        var clearSelection = document.createElement('span');
-        clearSelection.setAttribute('title', self.multi ? self.clearAllText : self.clearValueText);
-        clearSelection.setAttribute('class', 'Select-clear');
-        clearSelection.setAttribute('id', 'clearAll');
-        clearSelection.innerHTML = '×';
-        clearSelection.addEventListener('click', function() {
-          self.hasValue = false;
-        });
-        Polymer.dom(self.$.selectControl).appendChild(clearSelection);
+      if (newValue) {
+        if(self.clearable) {
+          clearSelection = document.createElement('span');
+          clearSelection.setAttribute('title', self.multi ? self.clearAllText : self.clearValueText);
+          clearSelection.setAttribute('class', 'Select-clear');
+          clearSelection.setAttribute('id', 'clearAll');
+          clearSelection.innerHTML = '×';
+          clearSelection.addEventListener('click', function () {
+            self.hasValue = false;
+          });
+          Polymer.dom(self.$.selectControl).appendChild(clearSelection);
+        }
       }
       else {
-        //self.selected = [];
         placeholder.innerHTML = this.placeholder;
-        var clearSelection = Polymer.dom(self.root).querySelector('span.Select-clear');
-        if (clearSelection)
+        clearSelection = Polymer.dom(self.root).querySelector('span.Select-clear');
+        if (clearSelection) {
           Polymer.dom(self.$.selectControl).removeChild(clearSelection);
+        }
       }
     },
 
@@ -266,7 +270,7 @@
     },
 
     handleKeyDown: function (event) {
-      if (this.disabled) return;
+      if (this.disabled) {return;}
 
       switch (event.keyCode) {
 
@@ -319,24 +323,24 @@
       event.preventDefault();
     },
 
-    onHovered: function (e) {
-      this.focusedOption = true;
-      e.target.closest(".Select-option").classList.toggle('is-focused');
-    },
-
-    onUnhovered: function (e) {
-      this.focusedOption = false;
-      e.target.closest(".Select-option").classList.toggle('is-focused');
-    },
+    //onHovered: function (e) {
+    //  this.focusedOption = true;
+    //  e.target.classList.toggle('is-focused');
+    //},
+    //
+    //onUnhovered: function (e) {
+    //  this.focusedOption = false;
+    //  e.target.classList.toggle('is-focused');
+    //},
 
     focusDropDown: function () {
       this.focused = true;
       Polymer.dom(this.root).querySelector('#search').focus();
     },
 
-    blurDropDown: function (e) {
+    blurDropDown: function () {
       var self = this;
-      var _blurTimeout = setTimeout(function () {
+      setTimeout(function () {
         //if (true) return;
         self.focused = false;
         //self.toggleSelectClass('is-focused', false);
@@ -354,16 +358,21 @@
 
     computeClass: function (multi, searchable, isOpen, focused, disabled, hasValue) {
       var classString = 'Select';
-      if (multi)
+      if (multi) {
         classString += ' is-multi';
-      if (searchable)
+      }
+      if (searchable) {
         classString += ' is-searchable';
-      if (isOpen)
+      }
+      if (isOpen) {
         classString += ' is-open';
-      if (disabled)
+      }
+      if (disabled) {
         classString += ' is-disabled';
-      if (hasValue)
+      }
+      if (hasValue) {
         classString += ' has-value';
+      }
       return classString;
     },
 
@@ -417,16 +426,17 @@
     },
 
     selectOption: function (e) {
-      if(!e.target.closest(".Select-option").classList.contains('is-disabled')) {
+
+      if(!e.target.classList.contains('is-disabled')) {
         var item = Polymer.dom(this.root).querySelector('#domRepeat').itemForElement(e.target);
         this.selectItem(item);
       }
     },
 
-    findAncestor: function (el, cls) {
-      while ((el = el.parentElement) && !el.classList.contains(cls));
-      return el;
-    },
+    //findAncestor: function (el, cls) {
+    //  while ((el = el.parentElement) && !el.classList.contains(cls));
+    //  return el;
+    //},
 
 
       selectItem: function (item) {
@@ -449,13 +459,15 @@
     removeItem: function (e) {
       var item = this.$$('#selectedRepeater').itemForElement(e.target);
       this.$.selector.select(item);
-      if(this.selected.length > 0)
+      if(this.selected.length > 0) {
         this.hasValue = true;
-      else
+      }
+      else {
         this.hasValue = false;
+      }
     },
 
-    changeScrollPosition: function (newValue, oldValue) {
+    changeScrollPosition: function (newValue) {
         var firstCell = Math.max(Math.floor(newValue / this.rowHeight) - this.cellsPerPage, 0);
         var cellsToCreate = Math.min(firstCell + this.numberOfCells, this.numberOfCells);
         var searchResult = this.searchData(this.hostValue, this.selected, firstCell, firstCell + cellsToCreate);
