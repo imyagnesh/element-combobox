@@ -13,7 +13,12 @@
   "quotmark": "single",
   "undef": true,
   "unused": true,
+  "freeze": true,
+  "forin": true,
+  "nownew": true,
+  "strict": true,
   "globals": {
+    "document": false,
     "wrap": true,
     "unwrap": true,
     "Polymer": true,
@@ -22,3 +27,4 @@
     "faker": false
   }
 }
+
