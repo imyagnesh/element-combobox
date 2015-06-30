@@ -15,7 +15,7 @@
   "unused": true,
   "freeze": true,
   "forin": true,
-  "nownew": true,
+  "nonew": true,
   "strict": true,
   "globals": {
     "document": false,

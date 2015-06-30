@@ -1,40 +1,46 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <script>
-  Polymer({
+  (function (polymer) {
+    'use strict';
 
-    is: 'html-echo',
+    polymer({
 
-    properties: {
-      html: {
-        type: String,
-        value: ''
+      is: 'html-echo',
+
+      properties: {
+        html: {
+          type: String,
+          value: ''
+        },
+
+        search:{
+          type: String,
+          value: ''
+        }
       },
 
-      search:{
-        type: String,
-        value: ''
+      observers: [
+        'htmlChanged(html, search)'
+      ],
+
+      htmlChanged: function(html, search) {
+        var self = this;
+        var regExp = /<\/?[^>]+>/gi;
+        self.innerHTML = html;
+        var array = html.replace(regExp,',').split(',').filter(Boolean);
+        _.forEach(array, function(n) {
+          var origin = n;
+          if (search) {
+            n = n.replace(new RegExp('(' + search + ')', 'gi'),
+              '<span class="highlighted">$1</span>');
+            self.innerHTML = self.innerHTML.replace(origin,n);
+          }
+        });
       }
-    },
 
-    observers: [
-      'htmlChanged(html, search)'
-    ],
+    });
+  })(Polymer);
 
-    htmlChanged: function(html, search) {
-      var self = this;
-      var regExp = /<\/?[^>]+>/gi;
-      self.innerHTML = html;
-      var array = html.replace(regExp,',').split(',').filter(Boolean);
-      _.forEach(array, function(n) {
-        var origin = n;
-        if (search) {
-          n = n.replace(new RegExp('(' + search + ')', 'gi'),
-            '<span class="highlighted">$1</span>');
-          self.innerHTML = self.innerHTML.replace(origin,n);
-        }
-      });
-    }
 
-  });
 </script>

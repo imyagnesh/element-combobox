@@ -1,10 +1,11 @@
-(function () {
+(function (polymer) {
 
+  'use strict';
 
   var typingTimer;                //timer identifier
   var doneTypingInterval = 250;  //time in ms, 5 second for example
 
-  Polymer({
+  polymer({
 
     is: 'avocado-comboBox',
 
@@ -513,4 +514,4 @@
 
   });
 
-})();
+})(Polymer);

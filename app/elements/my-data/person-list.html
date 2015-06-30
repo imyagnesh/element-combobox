@@ -22,8 +22,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 <script src="../../../bower_components/Faker/build/build/faker.js"></script>
 <script>
-(function(faker) {
-  Polymer({
+(function(polymer,faker) {
+
+  'use strict';
+
+  polymer({
     is: 'person-list',
 
     properties: {
@@ -54,6 +57,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return data;
     }
   });
-})(faker);
+})(Polymer,faker);
 </script>
 
