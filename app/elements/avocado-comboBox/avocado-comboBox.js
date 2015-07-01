@@ -222,6 +222,9 @@
       this.$.scroll.scrollTop = 0;
       this.scrollTop = 0;
       Polymer.dom(this.root).querySelector('#search').focus();
+      if(!newValue){
+        this.hostValue = '';
+      }
     },
 
     changeHasValue: function (newValue) {
@@ -442,6 +445,8 @@
 
       selectItem: function (item) {
       this.$.selector.select(item);
+      this.hostValue = '';
+      this.hasValue = true;
       var placeholder = Polymer.dom(this.root).querySelector('#SelectPlaceholder');
       if (this.multi) {
         placeholder.innerHTML = '';
@@ -453,8 +458,6 @@
         });
         this.isOpen = false;
       }
-      this.hostValue = '';
-      this.hasValue = true;
     },
 
     removeItem: function (e) {
