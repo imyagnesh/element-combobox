@@ -20,8 +20,8 @@
     //document.querySelector('body').removeAttribute('unresolved');
     //
     //// Ensure the drawer is hidden on desktop/tablet
-    //var checkbox = document.querySelector('#paperCheckbox');
-    //checkbox.checked = false;
+    var checkbox = document.querySelector('#paperCheckbox');
+    checkbox.checked = false;
   });
 
 })(document);
