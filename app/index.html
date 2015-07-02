@@ -44,7 +44,7 @@
         <div>
           <label>Noraml</label>
           <avocado-comboBox data="{{personList}}"
-                            display="{firstName}"
+                            display="{firstName} {lastName}"
                             disabled="{{isDisable}}"
                             html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>">
           </avocado-comboBox>
@@ -53,7 +53,7 @@
         <div>
           <label>clearable</label>
           <avocado-comboBox data="{{personList}}"
-                            display="{firstName}"
+                            display="{firstName} {lastName}"
                             html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>"
                             clearable="true">
           </avocado-comboBox>
@@ -61,15 +61,15 @@
         <div>
           <label>disabled</label>
           <avocado-comboBox data="{{response}}"
-                            display="{name}{code}"
-                            html="<table><tr><td valign='middle'>{name}{code}</td></tr></table>"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name} {code}</td></tr></table>"
                             key="name"
                             selected-item="Antarctica"></avocado-comboBox>
         </div>
         <div>
           <label>is-open</label>
           <avocado-comboBox data="{{personList}}"
-                            display="{firstName}"
+                            display="{firstName} {lastName}"
                             html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>"
                             is-open="true">
           </avocado-comboBox>
@@ -78,14 +78,14 @@
           <label>placeholder</label>
           <avocado-comboBox data="{{response}}"
                             display="{name} {code}"
-                            html="<table><tr><td valign='middle'>{name}</td></tr></table>"
+                            html="<table><tr><td valign='middle'>{name} {code}</td></tr></table>"
                             placeholder="Please Select Data..."></avocado-comboBox>
         </div>
         <div>
           <label>selected items</label>
           <avocado-comboBox data="{{response}}"
                             display="{name} {code}"
-                            html="<table><tr><td valign='middle'>{name}</td></tr></table>"
+                            html="<table><tr><td valign='middle'>{name} {code}</td></tr></table>"
                             key="name"
                             multi="true"
                             selected-item="AndorrA,Antarctica">
@@ -95,7 +95,7 @@
           <label>disable items</label>
           <avocado-comboBox data="{{response}}"
                             display="{name} {code}"
-                            html="<table><tr><td valign='middle'>{name}</td></tr></table>"
+                            html="<table><tr><td valign='middle'>{name} {code}</td></tr></table>"
                             key="name"
                             multi="true"
                             disabled-item="Afghanistan,Albania">
