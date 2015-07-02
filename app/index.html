@@ -41,66 +41,67 @@
       <iron-ajax auto url="../api/posts.json"
                  handle-as="json" last-response="{{response}}"></iron-ajax>
       <div id="example">
-        <!--<div>-->
-          <!--<label>Noraml</label>-->
-          <!--<avocado-comboBox data="{{personList}}"-->
-                            <!--display="{firstName}"-->
-                            <!--disabled="{{isDisable}}"-->
-                            <!--html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>">-->
-          <!--</avocado-comboBox>-->
-          <!--<paper-checkbox checked="{{isDisable}}" id="paperCheckbox">Disable</paper-checkbox>-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--<label>clearable</label>-->
-          <!--<avocado-comboBox data="{{personList}}"-->
-                            <!--display="{firstName}"-->
-                            <!--html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>"-->
-                            <!--clearable="true">-->
-          <!--</avocado-comboBox>-->
-        <!--</div>-->
+        <div>
+          <label>Noraml</label>
+          <avocado-comboBox data="{{personList}}"
+                            display="{firstName}"
+                            disabled="{{isDisable}}"
+                            html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>">
+          </avocado-comboBox>
+          <paper-checkbox checked="{{isDisable}}" id="paperCheckbox">Disable</paper-checkbox>
+        </div>
+        <div>
+          <label>clearable</label>
+          <avocado-comboBox data="{{personList}}"
+                            display="{firstName}"
+                            html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>"
+                            clearable="true">
+          </avocado-comboBox>
+        </div>
         <div>
           <label>disabled</label>
           <avocado-comboBox data="{{response}}"
                             display="{name}{code}"
                             html="<table><tr><td valign='middle'>{name}{code}</td></tr></table>"
+                            disabled="true"
                             key="name"
                             selected-item="Antarctica"></avocado-comboBox>
         </div>
-        <!--<div>-->
-          <!--<label>is-open</label>-->
-          <!--<avocado-comboBox data="{{personList}}"-->
-                            <!--display="{firstName}"-->
-                            <!--html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>"-->
-                            <!--is-open="true">-->
-          <!--</avocado-comboBox>-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--<label>placeholder</label>-->
-          <!--<avocado-comboBox data="{{response}}"-->
-                            <!--display="{name} {code}"-->
-                            <!--html="<table><tr><td valign='middle'>{name}</td></tr></table>"-->
-                            <!--placeholder="Please Select Data..."></avocado-comboBox>-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--<label>selected items</label>-->
-          <!--<avocado-comboBox data="{{response}}"-->
-                            <!--display="{name} {code}"-->
-                            <!--html="<table><tr><td valign='middle'>{name}</td></tr></table>"-->
-                            <!--key="name"-->
-                            <!--multi="true"-->
-                            <!--selected-item="AndorrA,Antarctica">-->
-          <!--</avocado-comboBox>-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--<label>disable items</label>-->
-          <!--<avocado-comboBox data="{{response}}"-->
-                            <!--display="{name} {code}"-->
-                            <!--html="<table><tr><td valign='middle'>{name}</td></tr></table>"-->
-                            <!--key="name"-->
-                            <!--multi="true"-->
-                            <!--disabled-item="Afghanistan,Albania">-->
-          <!--</avocado-comboBox>-->
-        <!--</div>-->
+        <div>
+          <label>is-open</label>
+          <avocado-comboBox data="{{personList}}"
+                            display="{firstName}"
+                            html="<table><tr><td valign='middle'><div class='circular-image'><img src='{avatar}'></div></td><td valign='middle'>{firstName} {lastName}</td></tr></table>"
+                            is-open="true">
+          </avocado-comboBox>
+        </div>
+        <div>
+          <label>placeholder</label>
+          <avocado-comboBox data="{{response}}"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name}</td></tr></table>"
+                            placeholder="Please Select Data..."></avocado-comboBox>
+        </div>
+        <div>
+          <label>selected items</label>
+          <avocado-comboBox data="{{response}}"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name}</td></tr></table>"
+                            key="name"
+                            multi="true"
+                            selected-item="AndorrA,Antarctica">
+          </avocado-comboBox>
+        </div>
+        <div>
+          <label>disable items</label>
+          <avocado-comboBox data="{{response}}"
+                            display="{name} {code}"
+                            html="<table><tr><td valign='middle'>{name}</td></tr></table>"
+                            key="name"
+                            multi="true"
+                            disabled-item="Afghanistan,Albania">
+          </avocado-comboBox>
+        </div>
       </div>
     </form>
     <label>Property Details</label>
