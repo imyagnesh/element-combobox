@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/../avocado-grid/app/styles/app-theme.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/.jshintrc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Api/person-data.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Api/posts.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/elements/avocado-comboBox/avocado-comboBox.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/elements/avocado-comboBox/avocado-comboBox.html" charset="UTF-8" />
@@ -20,7 +21,6 @@
     <file url="file://$PROJECT_DIR$/app/test/my-app-tests.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/test/yo-list-basic.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bower.json" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bower_components/polymer/polymer.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gulpfile.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/package.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wct.conf.js" charset="UTF-8" />

@@ -14,7 +14,7 @@
           value: ''
         },
 
-        search:{
+        search: {
           type: String,
           value: ''
         }
@@ -24,17 +24,17 @@
         'htmlChanged(html, search)'
       ],
 
-      htmlChanged: function(html, search) {
+      htmlChanged: function (html, search) {
         var self = this;
         var regExp = /<\/?[^>]+>/gi;
         self.innerHTML = html;
-        var array = html.replace(regExp,',').split(',').filter(Boolean);
-        _.forEach(array, function(n) {
+        var array = html.replace(regExp, ',').split(',').filter(Boolean);
+        _.forEach(array, function (n) {
           var origin = n;
           if (search) {
             n = n.replace(new RegExp('(' + search + ')', 'gi'),
               '<span class="highlighted">$1</span>');
-            self.innerHTML = self.innerHTML.replace(origin,n);
+            self.innerHTML = self.innerHTML.replace(origin, n);
           }
         });
       }

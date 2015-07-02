@@ -493,8 +493,10 @@
     searchData: function (input, selectedItems, startIndex, endIndex) {
       var searchResult = [];
       var display = this.display;
+      console.log(display);
       searchResult = _.select(this.data, function (n) {
         var selectString = display.replace(/\{(.*?)\}/g, function(g0,g1){ return n[g1]; });
+
         return (selectString.toLowerCase().indexOf(input.toLowerCase()) > -1);
       });
       //}

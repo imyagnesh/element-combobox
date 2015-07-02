@@ -18,6 +18,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
+    <iron-ajax auto url="../../Api/person-data.json"
+               handle-as="json" last-response="{{data}}"></iron-ajax>
   </template>
 </dom-module>
 <script src="../../../bower_components/Faker/build/build/faker.js"></script>
@@ -38,24 +40,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       dataUrl:{
         type: String
       }
-    },
-
-    ready: function () {
-      this.data = this.generateData();
-    },
-
-    generateData: function () {
-      var data= [];
-        for(var i = 0; i < 10; i++)
-        {
-          data.push({
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
-            avatar: faker.internet.avatar()
-          });
-        }
-        return data;
     }
+
+//    ready: function () {
+//      this.data = this.generateData();
+//    },
+//
+//    generateData: function () {
+//      var data= [];
+//        for(var i = 0; i < 10000; i++)
+//        {
+//          data.push({
+//            firstName: faker.name.firstName(),
+//            lastName: faker.name.lastName(),
+//            avatar: faker.internet.avatar()
+//          });
+//        }
+//      console.log(JSON.stringify(data));
+//        return data;
+//    }
   });
 })(Polymer,faker);
 </script>
